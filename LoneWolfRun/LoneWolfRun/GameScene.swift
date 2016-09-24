@@ -239,12 +239,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if impulseCount > 0 {
             runAction(impulsePopAction)
             playerNode!.physicsBody!.applyImpulse(CGVectorMake(0.0, 10.0))   //going up when touches screen
-            impulseCount--                                                  //decrease Impulse Count
+            impulseCount -= 1                                                  //decrease Impulse Count
             impulseTextNode.text = "IMPULSES : \(impulseCount)"             //update impulses display
             
             //show and hide engine burst
             engineExhaust!.hidden = false
-            NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "hideEngineExhaust:", userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: #selector(GameScene.hideEngineExhaust(_:)), userInfo: nil, repeats: false)
             
         }
         
@@ -258,10 +258,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if nodeB.name == "POWER_UP_ORB" {       //test if the object in contact is the Power Up
             runAction(orbPopAction)             //execute an audio sound when contact with Power Up
             print("There has been contact with star.")      //method test
-            impulseCount++                      //increment Impulse Count
+            impulseCount += 1                      //increment Impulse Count
             impulseTextNode.text = "IMPULSES : \(impulseCount)" //refresh impulse display
             
-            score++                                 //increment score
+            score += 1                                 //increment score
             scoreTextNode.text = "SCORE : \(score)" //refresh score display
             
             nodeB.removeFromParent()            //delete the Power Up
